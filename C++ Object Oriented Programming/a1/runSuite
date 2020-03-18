@@ -1,0 +1,43 @@
+#!/bin/bash
+if [ $# -ne 2 ];then
+        echo "number of arguments should be two." >&2
+        exit 2
+fi
+for fileName in $(cat $1)
+do
+	fileNameActual=$(mktemp /tmp/$fileName.XXX)
+	if [ ! -r ${fileName}.out ];then
+        	echo "${fileName}.out does not exist or is not readable." >&2
+		exit 2
+	fi
+	if [ -e ${fileName}.args ];then
+		if [ -e ${fileName}.in ];then
+			$2 $(cat ${fileName}.args) < ${fileName}.in > $fileNameActual
+		else
+			$2 $(cat ${fileName}.args) > $fileNameActual
+		fi
+	else
+		if [ -e ${fileName}.in ];then
+			$2 < ${fileName}.in > $fileNameActual
+		else
+			$2 > $fileNameActual
+		fi
+	fi
+	cmp -s $fileNameActual ${fileName}.out
+	if [ $? -ge 1 ]; then
+		echo Test failed: ${fileName}
+		echo Args:
+		if [ -e ${fileName}.args ];then
+			cat ${fileName}.args
+		fi
+		echo Input:
+		if [ -e ${fileName}.in ];then
+		      cat ${fileName}.in
+		fi
+		echo Expected:
+		cat ${fileName}.out
+		echo Actual:
+		cat $fileNameActual
+	fi
+	rm -f "$fileNameActual"
+done

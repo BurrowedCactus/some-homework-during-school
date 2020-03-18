@@ -1,0 +1,10 @@
+#!/bin/bash
+lines1="$(cat $2 | egrep $1 | wc -l)"
+lines2="$(cat $3 | egrep $1 | wc -l)"
+if [ $lines1 -lt $lines2 ]; then
+  	echo "$3"
+elif [ $lines1 -gt $lines2 ];then
+  	echo "$2"
+else
+  	echo "$2 $3"
+fi

@@ -1,0 +1,8 @@
+empty3
+longPeriod
+manyBalance
+noBalance
+notEnough
+notSufficient
+someBalance
+steady

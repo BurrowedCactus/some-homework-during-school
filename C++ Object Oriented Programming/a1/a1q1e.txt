@@ -1,0 +1,1 @@
+egrep "(L|l)(I|i)(N|n)(U|u)(X|x)\.(S|s)(T|t)(U|u)(D|d)(E|e)(N|n)(T|t)\.(C|c)(S|s)\.(U|u)(W|w)(A|a)(T|t)(E|e)(R|r)(L|l)(O|o)(O|o)\.(C|c)(A|a)" myfile.txt | wc -l

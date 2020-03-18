@@ -1,0 +1,9 @@
+compile by typing [make]
+clean compiled files by typing [make clean]
+clean compiled files and log files by typing [make clean2]
+
+after compilation: 
+run server by typing [./server.sh <four arguments specified by assignment requirements>]
+run client by typing [./client.sh <four arguments specified by assignment requirements>]
+
+Start the emulator first, then the client, the server last.

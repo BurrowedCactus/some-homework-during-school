@@ -1,0 +1,4 @@
+invalid
+pub1
+test1
+test2

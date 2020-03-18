@@ -1,0 +1,111 @@
+//#include <cstddef>
+#include "state.h"
+#include "subject.h"
+#include "observer.h"
+#include "info.h"
+#include "cell.h"
+#include <iostream>
+
+
+Direction Cell::getDirection(const Info& other) const {
+	if (other.row < r && other.col < c) return Direction::NW;
+	else if (other.row < r && other.col > c) return Direction::NE;
+	else if (other.row > r && other.col < c) return Direction::SW;
+	else if (other.row > r && other.col > c) return Direction::SE;
+	else if (other.row < r && other.col == c) return Direction::N;
+	else if (other.row > r && other.col == c) return Direction::S;
+	else if (other.row == r && other.col < c) return Direction::W;
+	else return Direction::E;
+}
+
+Cell::Cell(size_t r, size_t c):r{r}, c{c}{
+	colour = Colour::None;
+}
+
+Cell::Cell(size_t r, size_t c, Colour colour):r{r}, c{c}, colour{colour}{}
+
+
+bool Cell::isDirection(const Info& info, const State& state) const {
+	return getDirection(info) == state.direction;
+	/*
+	return 
+	(info.row < r && info.col < c && state.direction == Direction::NW) ||
+ 	(info.row < r && info.col > c && state.direction == Direction::NE) ||
+ 	(info.row > r && info.col < c && state.direction == Direction::SW) ||
+ 	(info.row > r && info.col > c && state.direction == Direction::SE) ||
+	(info.row < r && info.col == c && state.direction == Direction::N) ||
+	(info.row > r && info.col == c && state.direction == Direction::S) ||
+	(info.row == r && info.col < c && state.direction == Direction::W) ||
+	(info.row == r && info.col > c && state.direction == Direction::E);
+	*/
+}
+
+void Cell::reverseDirection(){
+	if (getState().direction == Direction::NW) setState(State{getState().type, getState().colour, Direction::SE});
+	else if (getState().direction == Direction::NE) setState(State{getState().type, getState().colour, Direction::SW});
+	else if (getState().direction == Direction::SW) setState(State{getState().type, getState().colour, Direction::NE});
+	else if (getState().direction == Direction::SE) setState(State{getState().type, getState().colour, Direction::NW});
+	else if (getState().direction == Direction::N) setState(State{getState().type, getState().colour, Direction::S});
+	else if (getState().direction == Direction::S) setState(State{getState().type, getState().colour, Direction::N});
+	else if (getState().direction == Direction::W) setState(State{getState().type, getState().colour, Direction::E});
+	else setState(State{getState().type, getState().colour, Direction::W});
+}
+
+void Cell::setPiece(Colour colour){
+	if(this-> colour == Colour::None){
+		this->colour = colour;
+		setState(State{StateType::NewPiece, colour, Direction::NW});
+		notifyObservers();
+	}
+}
+
+void Cell::toggle(){
+	if (colour == Colour::Black){
+		colour = Colour::White;
+	} else if (colour == Colour::White){
+		colour = Colour::Black;
+	}
+}
+//setState(State{getState().type, getState().colour, getState().direction});
+
+void Cell::notify(Subject<Info, State> &whoFrom){
+/*	
+	if (whoFrom.getState().type == StateType::NewPiece){
+		if (colour == whoFrom.getState().colour){
+			setState(State{StateType::Reply, getState().colour, getDirection(whoFrom.getInfo())});
+			reverseDirection();
+			notifyObservers();
+		} else if (colour == Colour::None){
+		
+		} else {//opposite colour
+			setState(State{StateType::Relay, getState().colour, getState().direction});
+			notifyObservers();
+		}
+	} else if (whoFrom.getState().type == StateType::Relay){
+		if(isDirection(whoFrom.getInfo(), whoFrom.getState())){
+			if (colour == whoFrom.getState().colour){
+				setState(State{StateType::Reply, getState().colour, getState().direction});
+                                reverseDirection();
+				notifyObservers();
+			} else if (colour == Colour::None){
+			
+			} else { //opposite colour
+				setState(State{StateType::Relay, getState().colour, getState().direction});
+				notifyObservers();
+			}
+		}
+	} else {// transfered state type is Reply
+		if(isDirection(whoFrom.getInfo(), whoFrom.getState())){
+			if (whoFrom.getState().colour != colour){
+				toggle();
+				notifyObservers();
+			}
+		}
+	}
+*/		
+}// My neighbours will call this
+                                                // when they've changed state
+Info Cell::getInfo() const{
+	return Info{r, c, colour};	
+}
+

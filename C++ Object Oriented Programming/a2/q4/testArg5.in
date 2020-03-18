@@ -1,0 +1,5 @@
+Your wc program, when given no command line arguments, should evaluate input
+received from standard input and print the number of lines, words, and
+characters read until an end-of-file signal is received. This default behaviour
+can be modified by giving wc one or more of the following command-line 
+arguments:

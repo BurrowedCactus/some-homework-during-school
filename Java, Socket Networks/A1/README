@@ -1,0 +1,17 @@
+compile by typing [make]
+clean by typing [make clean]
+
+after compilation: 
+run server by typing [./server.sh <req_code>]
+run client by typing [./client.sh <server address> <n_port> <req_code> <someMessage>]
+start the server before starting clients.
+
+If <someMessage> == GET , it retrieves messages from the server.
+If <someMessage> == TERMINATE , it terminates the server.
+Otherwise the message is saved in the server.
+
+If the complete command is used to start the client, the client will terminate after sending the message.
+
+When runing a client, the <req_code> and <someMessage> arguments are optional. These arguments can be typed in at runtime.
+Under this setting, multiple messages can be sent to the server. The client wont be closed after sending the messages.
+

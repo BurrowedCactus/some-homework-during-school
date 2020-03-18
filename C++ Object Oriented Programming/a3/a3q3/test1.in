@@ -1,0 +1,6 @@
+create a 1/2 4 -2/1 2 0/1 0 0/1 1
+print a
+move_assign a b
+move_copy a c
+print b
+print c

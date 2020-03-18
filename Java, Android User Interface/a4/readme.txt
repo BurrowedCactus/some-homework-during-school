@@ -1,0 +1,1 @@
+1: to clear a rating(set rating to 0), click on the rating and drag to 0.

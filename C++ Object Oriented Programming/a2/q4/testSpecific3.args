@@ -1,0 +1,1 @@
+-w test1.in -l test1.in -w test2.in test1.in -l

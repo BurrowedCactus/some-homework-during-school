@@ -1,0 +1,21 @@
+#!/bin/bash
+if [ $# -ne 2 ];then
+        echo "number of arguments should be two" >&2
+        exit 2
+fi
+for fileName in $(cat $1)
+do
+	if [ -r ${fileName}.args ];then
+		if [ -r ${fileName}.in ];then
+			$2 $(cat ${fileName}.args) < ${fileName}.in > ${fileName}.out
+		else
+			$2 $(cat ${fileName}.args) > ${fileName}.out
+		fi
+ 	else
+		if [ -r ${fileName}.in ];then
+			$2 < ${fileName}.in > ${fileName}.out
+		else
+			$2 > ${fileName}.out
+		fi
+	fi
+done

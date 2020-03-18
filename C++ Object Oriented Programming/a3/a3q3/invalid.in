@@ -1,0 +1,12 @@
+create a 1/0 1
+create b 2/3 1
+create c 0/1 0
+create d 0/1 5
+divide b c
+print a
+print b
+print c
+print d
+subtract d c
+subtract a c
+add a b

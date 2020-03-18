@@ -1,0 +1,5 @@
+ra "Hello "
+^a 0 "here "
+^a 20 "there "
+pa
+d a

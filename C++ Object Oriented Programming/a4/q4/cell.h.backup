@@ -1,0 +1,32 @@
+#ifndef CELL_H
+#define CELL_H
+#include <cstddef>
+#include "state.h"
+#include "subject.h"
+#include "observer.h"
+#include "info.h"
+
+class Cell : public Subject<Info, State>, public Observer<Info, State> {
+ private:  
+  const size_t r, c;
+  Colour colour = Colour::None;
+  // Add other private members if necessary
+Direction getDirection(const Info&) const;
+bool isDirection(const Info&, const State&) const;
+void reverseDirection();
+ public:
+
+
+  Cell(size_t r, size_t c);
+  Cell(size_t r, size_t c, Colour colour);
+  void setPiece(Colour colour);    // Place a piece of given colour here.
+
+  void toggle();         // Toggles my colour.
+
+  void notify(Subject<Info, State> &whoFrom) override;// My neighbours will call this
+                                                // when they've changed state
+
+  Info getInfo() const override;
+
+};
+#endif

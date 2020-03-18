@@ -1,0 +1,22 @@
+create a 4/5 4 3/4 3 2/3 2 1/2 1 5 0
+print a
+create b 5/3 4 -4/3 3 3/2 2 -2 1 -5 0
+print b
+create c 0/1 0
+print c
+subtract a b
+subtract a a
+subtract a c
+subtract c a
+add a b
+add a a
+add a c
+add c a
+multiply a b
+multiply b c
+multiply a a
+multiply c c
+divide a b
+divide c a
+divide b a
+divide a a
