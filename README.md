@@ -1,1 +1,1 @@
-# some-homework-during-school
+These are some homework during academic study.
